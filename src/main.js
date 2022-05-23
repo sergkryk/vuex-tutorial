@@ -3,11 +3,55 @@ import { createStore } from 'vuex';
 
 import App from './App.vue';
 
+const authStore = {
+  state() {
+    return {
+      isAuth: false,
+    }
+  },
+  mutations: {
+    setAuth(state, payload) {
+      state.isAuth = payload.isAuth;
+    }
+  },
+  actions: {
+    login(context) {
+      context.commit('setAuth', { isAuth: true });
+    },
+    logout(context) {
+      context.commit('setAuth', { isAuth: false })
+    }
+  },
+  getters: {
+    isAuth(state) {
+      return state.isAuth;
+    }
+  }
+}
+
 const app = createApp(App);
 const store = createStore({
+  modules: {
+    auth: authStore,
+  },
   state() {
     return {
       counter: 0,
+    }
+  },
+  mutations: {
+    increment(state) {
+      state.counter++;
+    },
+    incrementByValue(state, payload) {
+      state.counter = state.counter + payload.value;
+    }
+  },
+  actions: {
+    asyncIncrementByValue(context, payload) {
+      setTimeout(() => {
+        context.commit('incrementByValue', payload)
+      }, 2000)
     }
   },
   getters: {
@@ -23,14 +67,6 @@ const store = createStore({
         return 100;
       }
       return finalCounter;
-    }
-  },
-  mutations: {
-    increment(state) {
-      state.counter++;
-    },
-    incrementByValue(state, payload) {
-      state.counter = state.counter + payload.value;
     }
   }
 });
