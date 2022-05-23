@@ -1,6 +1,7 @@
 <template>
   <base-container title="Vuex">
-  <h3>{{  $store.state.counter }}</h3>
+  <h3>{{  $store.getters.counterMultipliedByTwo }}</h3>
+  <h3>{{  $store.getters.counterWithValidation }}</h3>
     <button @click="incrementCounter">Add 1</button>
     <button @click="incrementCounterByTen">Add 10</button>
   </base-container>
