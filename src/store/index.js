@@ -1,9 +1,9 @@
 import { createStore } from 'vuex';
 
 import authStoreModule from './autharizationStore/index';
-import storeMutations from './mutations';
-import storeActions from './actions';
-import storeGetters from './getters';
+import rootMutations from './mutations';
+import rootActions from './actions';
+import rootGetters from './getters';
 
 export const store = createStore({
   modules: {
@@ -14,7 +14,7 @@ export const store = createStore({
       counter: 0,
     }
   },
-  mutations: storeMutations,
-  actions: storeActions,
-  getters: storeGetters,
+  mutations: rootMutations,
+  actions: rootActions,
+  getters: rootGetters,
 });
